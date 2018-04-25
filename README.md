@@ -78,3 +78,42 @@
     - 여성과 남성의 구입 품목에서도 차이를 보이는데, 여성의 경우 delivery / 남성의 경우 Food 소비가 주를 이룸
     - HOTLE과 LEISURE는 도쿄 중심이 아니라 다양한 지역으로 분포 되어 있음, 여행목적이기 때문인 것으로 보임
     - 남성의 비중이 크고, 연령대도 높음
+    - 사용 가능 요일을 나타내는 USABLE feature는 의미가 없음 하지만 총 USABLE DAY에 따라 판매량을 재 검토해 볼 필요는 있음
+5. Feature 확정
+    1. Cosine Similarity: 쿠폰 정보만을 통해 기존 판매 데이터와의 유사도를 산출.
+        - PRICE_RATE
+        - zprice
+        - usable
+        - Case - dummy
+        - spot_large - dummy
+        - spot_pref - dummy
+        - spot_small - dummy
+        - DISPPERIOD
+        - VALIDPERIOD
+
+    2. 그레디언트 부스팅: 쿠폰+고객 정보가 하나의 데이터. 쿠폰+고객 정보를 모두 feature 데이터 사용.
+        - PRICE_RATE
+        - DISPPERIOD
+        - USABLE_DATE - dummy
+        - VALID
+        - Case - dummy
+        - zprice
+        - SEX_ID - dummy
+        - AGE
+
+## 4. 모델링
+1. Cosine Similarity
+    1. 구매된 내역(detail_train)데이터를 통해 각 고객이 구매한 쿠폰의 특성을 구함. 각 고객의 특성은 위에서 확정한 feature만 사용.
+    2. 위에서 구한 고객 특성과 테스트 쿠폰 특성의 코사인 유사도를 구함.
+    3. 유사도가 높은 쿠폰을 구매할 것이라고 예측.
+
+2. 그레디언트 부스트(XGBoost 라이브러리)
+    1. feature data는 위에서 구한 값으로 확정
+    2. target data는 PURCHASE_FLG(0: 구매 안함, 1: 구매).
+    3. 테스트 데이터로는 고객정보(user_list)와 테스트 쿠폰 정보(coupon_list_test)를 사용.
+
+3. Cosine Similarity가 그레디언트 부스트 방법보다 뛰어난 성능을 보여 Cosine Similarity를 최종 모델로 선정
+
+## 5. 제출
+- 최종 점수: 0.006201
+- 1076명 중 76위 (상위 7%)
