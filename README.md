@@ -5,9 +5,11 @@
 1. 내용: 고객의 패턴(방문, 구매 내역 등)을 통해 해당 고객이 어떤 쿠폰을 구매할지 예측
     - https://ponpare.jp/ 사이트의 데이터
 2. 평가 기준: the Mean Average Precision @ 10 (MAP@10)
+
 $$
 MAP@10 = \frac{1}{|U|} \sum_{u=1}^{|U|} \frac{1}{min(m, 10)} \sum_{k=1}^{min(n,10)} P(k)
 $$
+
 3. 데이터: 8개 테이블로 구성
     - coupon_area_test: 테스트용 쿠폰의 지역 정보
     - coupon_area_train: train용 쿠폰의 지역 정보
@@ -27,21 +29,21 @@ $$
 1. 일본어 포함된 데이터는 영어로 변환.
 2. 쿠폰 구매 내역, 쿠폰 조회 내역, 쿠폰 리스트, 고객 리스트 Merge:
 
-    **1. detail_train : 쿠폰 구매 내역: 168,996rows * 6columns**
+    1. detail_train : 쿠폰 구매 내역: 168,996rows * 6columns
         - I_DATE: 구매한 날짜
         - ITEM_COUNT: 구매한 제품 갯수
         - COUPON_ID_hash: COUPON number
         - PURCHASEID_hash: 구매 번호
         - SMALL_AREA_NAME: 고객 거주지역(소단위)
         - USER_ID_hash: USER ID
-    **2. visit_train: 쿠폰 조회 내역: 2,833,180rows * 8 columns**
+    2. visit_train: 쿠폰 조회 내역: 2,833,180rows * 8 columns
         - I_DATE: 홈페이지 방문 날짜
         - PAGE_SERIAL: page number
         - PURCHASE_FLG: 구매 여부(0: 구매 안함, 1: 구매)
         - REFERRER_hash, SESSION_ID_hash: 접속 로그와 비슷한 개념
         - USER_ID_hash: USER ID
         - VIEW_COUPON_ID_hash: 고객이 조회한 COUPON ID
-    **3. Coupon_list, 쿠폰 리스트: 19,413rows * 24 columns**
+    3. Coupon_list, 쿠폰 리스트: 19,413rows * 24 columns
         - DISPFROM, DISPEND, DISPPERIOD: 상품 release 기간
         - VALIDFROM, VALIDEND, VALIDPERIOD: 상품 유효 기간
         - CATALOG_PRICE: 소비자가(정가)
@@ -53,7 +55,7 @@ $$
         - LARGE_AREA_NAME: 쿠폰 사용 가능 지역(대분류)
         - ken_name: 쿠폰 사용 가능 지역(중분류, Prefecture)
         - SMALL_AREA_NAME: 쿠폰 사용 가능 지역(소분류)
-    **4. User_list**
+    4. User_list
         - REG_DATE: 가입한 날짜
         - WITHDRAW_DATE: 탈퇴한 날짜
         - AGE: 연령
