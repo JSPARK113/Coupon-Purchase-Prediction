@@ -5,11 +5,6 @@
 1. 내용: 고객의 패턴(방문, 구매 내역 등)을 통해 해당 고객이 어떤 쿠폰을 구매할지 예측
     - https://ponpare.jp/ 사이트의 데이터
 2. 평가 기준: the Mean Average Precision @ 10 (MAP@10)
-
-$$
-MAP@10 = \frac{1}{|U|} \sum_{u=1}^{|U|} \frac{1}{min(m, 10)} \sum_{k=1}^{min(n,10)} P(k)
-$$
-
 3. 데이터: 8개 테이블로 구성
     - coupon_area_test: 테스트용 쿠폰의 지역 정보
     - coupon_area_train: train용 쿠폰의 지역 정보
@@ -75,7 +70,7 @@ $$
     - CATALOG_PRICE / DISCOUNT_PRICE / Price는 분포 및 상관관계가 유사 -> Price 유지하며, 정규화 처리
     - DISPPERIOD: 기간이 긴 것들이 일부 존재(평균을 10이라고 했을때, 4만(구매는 9,300)) 하지만 OUTLIER라고 활 명확한 근거가 없음
     - VALIDPERIOD: 유효기간의 제한이 없는 것들이 대다수를 차지함
-4. categoric data
+4. categorical data
     - Case: DELIVERY, FOOD가 대다수를 차지 -> 연령 및 성별 등과 복합적으로 봐야할 것으로 보임
     - REGION: 9개의 large_area에서 55개의 small area로 나뉨, 대다수가 Tokyo, Osaka등 대도시임
     - 30대~50대가 대부분의 소비를 차지하고 있으며, 이들이 delivery와 food를 주로 구매하고 있음
