@@ -1,5 +1,6 @@
 # Coupon Purchase Prediction
-
+- 세부 내용 및 코드는 Coupon_Purchase_Prediction.ipynb 에서 확인 가능
+- URL: https://github.com/JSPARK113/Coupon-Purchase-Prediction/blob/master/Coupon_Purchase_Prediction.ipynb
 ## 1. 프로젝트 개요
 
 1. 내용: 고객의 패턴(방문, 구매 내역 등)을 통해 해당 고객이 어떤 쿠폰을 구매할지 예측
